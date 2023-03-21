@@ -1,0 +1,22 @@
+version: '3'
+services:
+  web:
+    build: 
+      context: .
+      dockerfile: ./Dockerfile
+    volumes:
+      - ./instrument-store-web-php:/var/www/html
+    container_name: webb
+    working_dir: /var/www/html
+    ports:
+      - "80:80"
+  mysql:
+    image: mysql:5.6
+    container_name: sqlhung
+    volumes:
+        - ./sql:/var/lib/mysql
+    environment:
+        MYSQL_ROOT_PASSWORD:12345
+        MYSQL_DATABASE:instrumentstore 
+    ports:
+        - "3306:3306"
